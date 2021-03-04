@@ -2,8 +2,12 @@ import paramiko
 import shutil
 import os
 import time
+import datetime
 
+#  variables
 host = os.listdir('srv/')
+date = datetime.datetime.now()
+#  Fin de variable
 
 #  Conf Paramiko
 ssh = paramiko.SSHClient()
@@ -19,9 +23,11 @@ def regroupement():
     print("- Regroupement des fichiers dans " + remote_file)
     ssh.exec_command("mkdir " + src_folder)
     with open("srv/" + host[i], "r") as f:
-        fichier = [line.strip() for line in f]
-        for g in range(len(fichier)):
-            ssh.exec_command("cp " + fichier[g] + " " + src_folder)
+        dl = [line.strip() for line in f]
+        for g in range(len(dl)):
+            from os.path import basename
+            nom_de_fichier = basename(dl[g])
+            ssh.exec_command("cp " + dl[g] + " " + src_folder + "/" + nom_de_fichier + " " + (date.strftime("%F")))
 
 
 def creation_archive():
