@@ -56,7 +56,7 @@ def supression():
 def close_ok():
     sftp.close()
     ssh.close()
-    print("##### Fin de la tache pour l'hôte " + host[i] + " OK #####")
+    print("##### Fin de la tache pour l'hôte " + host[i] + " OK TOTO #####")
 
 
 for i in range(len(host)):
