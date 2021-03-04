@@ -31,7 +31,7 @@ def regroupement():
 
 
 def creation_archive():
-    print("- Creation de l'archive : " + remote_file)
+    print("- Création de l'archive : " + remote_file)
     ssh.exec_command("cd " + src_folder + " && tar -czvf " + archive + " .")
     time.sleep(3)
 
