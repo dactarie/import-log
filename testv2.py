@@ -42,7 +42,7 @@ def import_fichiers():
 
 
 def decompactage():
-    print("- Décompactage de larchive dans " + dst_folder)
+    print("- Décompactage de l'archive dans " + dst_folder)
     shutil.unpack_archive(dst_file, dst_folder)
 
 
