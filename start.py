@@ -29,6 +29,11 @@ def regroupement():
             ssh.exec_command("mkdir " + src_folder + "/" + nom_de_fichier)
             ssh.exec_command("cp " + dl[g] + " " + src_folder + "/" + nom_de_fichier + "/" + nom_de_fichier + "-" +
                              (date.strftime("%F")))
+            taille = os.path.getsize(dl[g])
+            if taille > 0:
+                ssh.exec_command("> " + dl[g])
+            else:
+                print("il y a un probleme")
 
 
 def creation_archive():
@@ -60,6 +65,11 @@ def close_ok():
     print("##### Fin de la tache pour l'hôte " + host[i] + " OK #####")
 
 
+def analyse_rapide():
+    fichier_a_scanner = dst_folder + "*" + date.strftime("%F")
+    print(fichier_a_scanner)
+
+
 for i in range(len(host)):
     #  Variables
     date = datetime.datetime.now()
@@ -78,3 +88,4 @@ for i in range(len(host)):
     decompactage()
     supression()
     close_ok()
+    analyse_rapide()
