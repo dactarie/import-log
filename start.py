@@ -6,6 +6,8 @@ import datetime
 
 #  variables
 host = os.listdir('srv/')
+path_cible = "/home/guillaume/log/"
+path_tmp_client = "/tmp/"
 #  Fin de variable
 
 #  Conf Paramiko
@@ -62,22 +64,31 @@ def supression():
 def close_ok():
     sftp.close()
     ssh.close()
-    print("##### Fin de la tache pour l'hôte " + host[i] + " OK #####")
+    print("##### Fin de la tache pour l'hôte " + host[i] + " #####")
 
 
 def analyse_rapide():
-    fichier_a_scanner = dst_folder + "*" + date.strftime("%F")
-    print(fichier_a_scanner)
+    print("- Scan rapide des fichiers.")
+    with open("srv/" + host[i], "r") as f:
+        dl = [line.strip() for line in f]
+        for g in range(len(dl)):
+            from os.path import basename
+            fichier_a_scanner = dst_folder + basename(dl[g]) + "/" + basename(dl[g]) + "-" + date.strftime("%F")
+            with open(fichier_a_scanner, "r") as toto:
+                if "cible" in toto:
+                    print("-")
+                else:
+                    print("-")
 
 
 for i in range(len(host)):
     #  Variables
     date = datetime.datetime.now()
-    src_folder = "/tmp/" + host[i]
-    remote_file = "/tmp/" + host[i] + ".tar.gz"
-    dst_file = "/tmp/" + host[i] + ".tar.gz"
-    dst_folder = "/home/guillaume/log/" + host[i] + "/"
-    archive = "/tmp/" + host[i] + ".tar.gz"
+    src_folder = path_tmp_client + host[i]
+    remote_file = path_tmp_client + host[i] + ".tar.gz"
+    dst_file = path_tmp_client + host[i] + ".tar.gz"
+    dst_folder = path_cible + host[i] + "/"
+    archive = path_tmp_client + host[i] + ".tar.gz"
     ssh.connect(hostname=host[i], port=port, username=username)
     sftp = ssh.open_sftp()
     #  Fin des variables
