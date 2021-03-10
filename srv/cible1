@@ -1,3 +1,4 @@
 /var/log/syslog
 /var/log/auth.log
 /var/log/boot.log
+/tmp/toto.iso
