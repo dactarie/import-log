@@ -31,16 +31,18 @@ def regroupement():
             ssh.exec_command("mkdir " + src_folder + "/" + nom_de_fichier)
             ssh.exec_command("cp " + dl[g] + " " + src_folder + "/" + nom_de_fichier + "/" + nom_de_fichier + "-" +
                              (date.strftime("%F")))
+            print(dl)
             taille = os.path.getsize(dl[g])
             if taille > 0:
                 ssh.exec_command("> " + dl[g])
             else:
-                print("il y a un probleme")
+                print(dl[g])
 
 
 def creation_archive():
     print("- Création de l'archive : " + remote_file)
-    ssh.exec_command("cd " + src_folder + " && tar -czvf " + archive + " .")
+    a,b,c = ssh.exec_command("cd " + src_folder + " && tar -czvf " + archive + " . && echo $?")
+    print(b.channel.recv_exit_status())
     time.sleep(3)
 
 
