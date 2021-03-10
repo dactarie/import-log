@@ -70,7 +70,7 @@ def close_ok():
 
 
 def analyse_rapide():
-    print("- Scan rapide des fichiers.")
+    print("- Scan rapide des fichiers. toto")
     with open("srv/" + host[i], "r") as f:
         dl = [line.strip() for line in f]
         for g in range(len(dl)):
