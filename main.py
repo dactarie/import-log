@@ -7,7 +7,7 @@ import threading
 
 #  Variables
 path_server = os.environ["HOME"] + "/log/"  # Where your want to import your file(s) (STEP 4)
-path_tmp = "/tmp/"  # Folder Temp On remote AND local (STEP 4)
+path_tmp = "/tmp/"  # Folder Temp On remote and local (STEP 4)
 log_paramiko = '/tmp/paramiko.log'  # Log Paramiko (STEP 4)
 login = 'root'  # Your user for SSH connect (STEP 4)
 # Fin des variables
