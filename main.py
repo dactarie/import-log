@@ -6,22 +6,22 @@ import datetime
 import threading
 
 #  Variables
-path_cible = os.environ["HOME"] + "/log/"  # Where your want to import your file(s) (STEP 4)
-path_tmp_client = "/tmp/"  # Folder Temp On remote AND local (STEP 4)
+path_server = os.environ["HOME"] + "/log/"  # Where your want to import your file(s) (STEP 4)
+path_tmp = "/tmp/"  # Folder Temp On remote AND local (STEP 4)
 log_paramiko = '/tmp/paramiko.log'  # Log Paramiko (STEP 4)
 login = 'root'  # Your user for SSH connect (STEP 4)
 # Fin des variables
 
 
 class Lancement:
-    def __init__(self, host):
-        self.host = host
+    def __init__(self, customer):
+        self.host = customer
         self.date = datetime.datetime.now()
-        self.src_folder = path_tmp_client + host
-        self.remote_file = path_tmp_client + host + ".tar.gz"
-        self.dst_file = path_tmp_client + host + ".tar.gz"
-        self.dst_folder = path_cible + host + "/"
-        self.archive = path_tmp_client + host + ".tar.gz"
+        self.src_folder = path_tmp + customer
+        self.remote_archive = path_tmp + customer + ".tar.gz"
+        self.dst_archive = path_tmp + customer + ".tar.gz"
+        self.dst_folder = path_server + customer + "/"
+        self.archive = path_tmp + customer + ".tar.gz"
         self.ssh = paramiko.SSHClient()
         self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         self.port = 22
@@ -42,9 +42,8 @@ class Lancement:
         execution.scan_rapide()
 
     def regroupement(self):
-        print(self.host + " regroupement")
         self.ssh.exec_command("mkdir " + self.src_folder)
-        with open("srv/" + self.host, "r") as f:
+        with open("customer/" + self.host, "r") as f:
             dl = [line.strip() for line in f]
             for g in range(len(dl)):
                 from os.path import basename
@@ -54,44 +53,38 @@ class Lancement:
                                       "/" + nom_de_fichier + "-" + (self.date.strftime("%F")))
 
     def creation_archive(self):
-        print(self.host + " creation archive")
         self.ssh.exec_command("cd " + self.src_folder + " && tar -czf " + self.archive + " .")
         time.sleep(1)
 
     def import_fichiers(self):
-        print(self.host + " Import archive")
-        self.sftp.get(self.remote_file, self.dst_file)
+        self.sftp.get(self.remote_archive, self.dst_archive)
 
     def decompactage(self):
-        print(self.host + " Décompactage archive")
-        shutil.unpack_archive(self.dst_file, self.dst_folder)
+        shutil.unpack_archive(self.dst_archive, self.dst_folder)
 
     def supression(self):
-        print(self.host + " Suppression")
-        self.sftp.remove(self.remote_file)
+        self.sftp.remove(self.remote_archive)
         self.ssh.exec_command("rm -Rf " + self.src_folder)
-        os.remove(self.dst_file)
-        with open("srv/" + self.host, "r") as f:
+        os.remove(self.dst_archive)
+        with open("customer/" + self.host, "r") as f:
             full_path_of_file = [line.strip() for line in f]
             for g in range(len(full_path_of_file)):
                 from os.path import basename
                 nom_de_fichier = basename(full_path_of_file[g])
-                taille = os.path.getsize(path_cible + self.host + "/" + nom_de_fichier + "/" + nom_de_fichier + "-" +
+                taille = os.path.getsize(path_server + self.host + "/" + nom_de_fichier + "/" + nom_de_fichier + "-" +
                                          (self.date.strftime("%F")))
                 if taille != 0:
                     self.ssh.exec_command("> " + full_path_of_file[g])
                 else:
-                    print("le fichier " + nom_de_fichier + " sur " + self.host + " est vide !")
-                    print(full_path_of_file)
+                    print("\x1b[41m" + "File : " + nom_de_fichier + " on " + self.host + " is empty !" + '\033[0m')
 
     def close_ok(self):
         self.sftp.close()
         self.ssh.close()
-        print('\x1b[6;30;46m' + "##### Ok pour " + self.host + " #####"'\033[0m')
+        print("\x1b[42m" + "Task " + self.host + " OK"'\033[0m')
 
     def scan_rapide(self):
-        print("- Scan rapide des fichiers.")
-        with open("srv/" + self.host, "r") as f:
+        with open("customer/" + self.host, "r") as f:
             dl = [line.strip() for line in f]
             for g in range(len(dl)):
                 from os.path import basename
@@ -106,9 +99,9 @@ class Lancement:
 
 if __name__ == "__main__":
     threads = list()
-    all_name_of_host = os.listdir('srv/')  # Folder for list of server(s) (STEP 2)
-    for i in range(len(all_name_of_host)):
-        a = Lancement(all_name_of_host[i])
+    all_name_of_customer = os.listdir('customer/')  # Folder for list of server(s) (STEP 2)
+    for name_of_customer in range(len(all_name_of_customer)):
+        a = Lancement(all_name_of_customer[name_of_customer])
         x = threading.Thread(target=a.thread_function)
         threads.append(x)
         x.start()
