@@ -38,7 +38,7 @@ class Launch:
         execution.unpack()
         execution.remove_trace()
         execution.close_ok()
-        execution.scan_rapide()
+        execution.fast_scan()
 
     def grouping(self):  # This function grouping all your file into /path_tmp/name_of_your_customer.
         self.ssh.exec_command("mkdir " + self.remote_folder)
@@ -82,7 +82,7 @@ class Launch:
         self.ssh.close()
         print("\x1b[42m" + "Task " + self.host + " OK"'\033[0m')
 
-    def scan_rapide(self):
+    def fast_scan(self):
         with open("customer/" + self.host, "r") as f:
             list_of_name_of_file = [line.strip() for line in f]
             for name_of_file in range(len(list_of_name_of_file)):
