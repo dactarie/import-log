@@ -92,7 +92,7 @@ class Launch:
                     + basename(list_of_name_of_file[name_of_file]) + "-" + self.date.strftime("%F")
                 with open(files_to_scan, "r") as toto:
                     if "cible" in toto:
-                        pass
+                        print("ceci est un test de branch")
                     else:
                         pass
 
