@@ -97,7 +97,7 @@ class Launch:
                         pass
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # Launch this script in Multi-thread
     threads = list()
     all_name_of_customer = os.listdir('customer/')  # Folder for list of server(s) (STEP 2)
     for name_of_customer in range(len(all_name_of_customer)):
