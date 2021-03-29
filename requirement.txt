@@ -1,0 +1,2 @@
+python 3.9
+paramiko (pip install paramiko)
