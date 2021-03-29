@@ -7,6 +7,10 @@ Présentation
 
 Un script en python qui vous permet d'importé tous vos log de vos VM/Serveur distant de maniere simple et automatisé.
 
+## Requirement :
+
+* Python 3.9, Paramiko (pip install paramiko)
+
 ## Configuration :
 
 * 1° : Il vous faut ajouté votre clé ssh sur le serveur distant si ce n'est deja fait  (ex : https://blog.microlinux.fr/cle-ssh/)
