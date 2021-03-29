@@ -46,10 +46,10 @@ class Launch:
             dl = [line.strip() for line in list_of_files]
             for g in range(len(dl)):
                 from os.path import basename
-                nom_de_fichier = basename(dl[g])
-                self.ssh.exec_command("mkdir " + self.remote_folder + "/" + nom_de_fichier)
-                self.ssh.exec_command("cp " + dl[g] + " " + self.remote_folder + "/" + nom_de_fichier +
-                                      "/" + nom_de_fichier + "-" + (self.date.strftime("%F")))
+                name_of_file = basename(dl[g])
+                self.ssh.exec_command("mkdir " + self.remote_folder + "/" + name_of_file)
+                self.ssh.exec_command("cp " + dl[g] + " " + self.remote_folder + "/" + name_of_file +
+                                      "/" + name_of_file + "-" + (self.date.strftime("%F")))
 
     def create_tar(self):  # This function create a archive of all content in /path_tmp/name_of_your_customer.
         self.ssh.exec_command("cd " + self.remote_folder + " && tar -czf " + self.archive + " .")
@@ -70,8 +70,8 @@ class Launch:
             for g in range(len(full_path_of_file)):
                 from os.path import basename
                 name_of_file = basename(full_path_of_file[g])
-                size = os.path.getsize(path_server + self.host + "/" + name_of_file + "/" + name_of_file + "-" +
-                                         (self.date.strftime("%F")))
+                size = os.path.getsize(path_server + self.host + "/" + name_of_file + "/" + name_of_file + "-" + 
+                                       (self.date.strftime("%F")))
                 if size != 0:
                     self.ssh.exec_command("> " + full_path_of_file[g])  # suppress content of file.
                 else:
@@ -91,8 +91,8 @@ class Launch:
                     self.dst_folder + basename(list_of_name_of_file[name_of_file]) + "/" \
                     + basename(list_of_name_of_file[name_of_file]) + "-" + self.date.strftime("%F")
                 with open(files_to_scan, "r") as toto:
-                    if "cible" in toto:
-                        print("ceci est un test de branch")
+                    if "host" in toto:
+                        print("hello est un test de branch")
                     else:
                         pass
 
