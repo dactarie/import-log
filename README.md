@@ -14,9 +14,9 @@ Un script en python qui vous permet d'importer tous vos log de vos VM/Serveur di
 
 * 3° : Ajouté dans ce fichier la liste de vos fichiers à importer (chemin complet depuis la racine et un fichier par ligne).
 
-* 4° : Le serveur doit être joignable à partir de ce même nom de fichier que vous venez de créer (si son nom est différent de celui joignable sur le réseau vous pouvez l'ajouter dans le fichier /etc/hosts (ex: 192.168.1.2 serveur).
+* 4° : Le serveur doit être joignable à partir de ce même nom de fichier que vous venez de créer (si son nom est différent de celui joignable sur le réseau vous pouvez l'ajouter dans le fichier /etc/hosts ou pour windows C:\windows\system32\drivers\hosts (ex: 192.168.1.2 serveur).
 
-* 4° : Pour finir il vous faut configurer les diverses options de variables dans le fichier python si nécessaire selon vos besoin (Ligne 9 à 12).
+* 4° : Pour finir il vous faut configurer les diverses options de variables dans le fichier python si nécessaire selon vos besoins (Ligne 9 à 12).
 
 * 5° : Exécuter votre script (python3.9 main.py).
 
