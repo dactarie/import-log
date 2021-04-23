@@ -34,7 +34,8 @@ Un script en python qui vous permet d'importer tous vos log de vos VM/Serveur di
 ### Ajout a venir :
 
 * Gestion des droits sur les fichiers importés.
-* correction du bug de l'import de gros fichier (<10Mo).
+* Correction du bug de l'import de gros fichier (<10Mo).
+* Script plus modulaire (n'effacera plus le contenue de fichier source si l'export n'est pas de type Log par exemple).
 
 
-#### ATTENTION : Vous pouvez toutefois importer tout type de fichiers avec ce script mais celui-ci efface le contenu du fichier importé, pensez donc à commenter la ligne execution.remove_trace(). 
+#### ATTENTION : Vous pouvez toutefois importer tout type de fichiers avec ce script mais celui-ci efface le contenu du fichier importé, pensez donc à commenter la ligne "execution.remove_trace()". 
