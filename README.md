@@ -29,7 +29,7 @@ Un script en python qui vous permet d'importer tous vos log de vos VM/Serveur di
 
 * Si votre fichier importé est vide, le script vous le notifie.
 * Malgré un script totalement fonctionnel il subsistent encore un bug principal : il n'est pas capable de transférer de gros fichier, en effet le module Paramiko n'est pas très adapté dans le cas d'une création d'archive. il semblerait que celui-ci mette fin à la commande dès lors que celle-ci est bien exécutée. Il vaut donc mieux ne pas dépasser quelques MO (au total) afin de pouvoir réussir a importé une archive complète.
-* Le module Scan rapide vous permettra de faire un premier scan rapide des fichiers importé et de vous notifier dès lors qu'un certain mot apparaît plusieurs fois.
+* (Encore en développement) Le module Scan rapide vous permettra de faire un premier scan rapide des fichiers importé et de vous notifier dès lors qu'un certain mot apparaît plusieurs fois.
 
 ### Ajout a venir :
 
