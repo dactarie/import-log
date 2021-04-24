@@ -2,6 +2,15 @@
 
 Un script en python qui vous permet d'importer tous vos log de vos VM/Serveur distant de manière simple et automatisé.
 
+## Fonctionnement :
+
+* 1° : Regroupe les fichiers de l'hote dans un dossier pré-définit (dans mon exemple /tmp/"nom de l'hote").
+* 2° : Creation d'une archive dans ce meme dossier pré-définit (dans mon exemple /tmp/"nom de l'hote").
+* 3° : Import de l'archive sur le serveur dans le dossier pré-définit (dans mon exemple /tmp/"nom de l'hote".tar).
+* 4° : Décompactage des fichier vers leurs endroits définitifs (dans mon exemple /home/"user"/"nom de l'hote").
+* 5° : Vidage du contenu des fichiers importé sur l'hote.
+* 6° : Fermeture des session Sftp et Ssh. 
+
 ## Prérequis :
 
 * Python 3.9, Paramiko (pip install paramiko)
