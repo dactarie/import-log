@@ -1,4 +1,1 @@
-Avoir configuré votre connection ssh avec votre clé (ex : https://blog.microlinux.fr/cle-ssh/).
-python 3.9
-pip (python3-pip).
-paramiko (pip install paramiko)
+paramiko==2.7.2
